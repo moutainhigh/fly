@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://code.alibabatech.com/schema/dubbo
+  		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="main-web" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<context:property-placeholder location="classpath:zookeeper.properties"
+		ignore-unresolvable="true" />
+	<dubbo:registry address="${zookeeper.address}" />
+
+	<!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+	<dubbo:reference id="userService"
+		interface="cn.jkm.uis.facade.UserFacade" check="false" />
+		
+	<dubbo:reference id="payResultMsgService" interface="cn.jkm.eb.facade.mq.PayResultMsgFacade" check="false" />
+</beans>
+

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jkm.jis.service.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.jkm.uis.facade.entities.User">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="header_url" jdbcType="VARCHAR" property="headerUrl" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="gmt_time" jdbcType="BIGINT" property="gmtTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="third_id" jdbcType="CHAR" property="thirdId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account, device_id, nickname, header_url, sex, password, gmt_time, status, third_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_user
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.jkm.uis.facade.entities.User">
+    insert into tb_user (id, account, device_id, 
+      nickname, header_url, sex, 
+      password, gmt_time, status, 
+      third_id)
+    values (#{id,jdbcType=CHAR}, #{account,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{headerUrl,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, 
+      #{password,jdbcType=VARCHAR}, #{gmtTime,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
+      #{thirdId,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.jkm.uis.facade.entities.User">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="headerUrl != null">
+        header_url,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="gmtTime != null">
+        gmt_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="thirdId != null">
+        third_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headerUrl != null">
+        #{headerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtTime != null">
+        #{gmtTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="thirdId != null">
+        #{thirdId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.jkm.uis.facade.entities.User">
+    update tb_user
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headerUrl != null">
+        header_url = #{headerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtTime != null">
+        gmt_time = #{gmtTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="thirdId != null">
+        third_id = #{thirdId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.jkm.uis.facade.entities.User">
+    update tb_user
+    set account = #{account,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      header_url = #{headerUrl,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      password = #{password,jdbcType=VARCHAR},
+      gmt_time = #{gmtTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      third_id = #{thirdId,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="cn.jkm.uis.facade.entities.User">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="header_url" jdbcType="VARCHAR" property="headerUrl" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="gmt_time" jdbcType="BIGINT" property="gmtTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="third_id" jdbcType="CHAR" property="thirdId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account, device_id, nickname, header_url, sex, password, gmt_time, status, third_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_user
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.jkm.uis.facade.entities.User">
+    insert into tb_user (id, account, device_id, 
+      nickname, header_url, sex, 
+      password, gmt_time, status, 
+      third_id)
+    values (#{id,jdbcType=CHAR}, #{account,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{headerUrl,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, 
+      #{password,jdbcType=VARCHAR}, #{gmtTime,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
+      #{thirdId,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.jkm.uis.facade.entities.User">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="headerUrl != null">
+        header_url,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="gmtTime != null">
+        gmt_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="thirdId != null">
+        third_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headerUrl != null">
+        #{headerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtTime != null">
+        #{gmtTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="thirdId != null">
+        #{thirdId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.jkm.uis.facade.entities.User">
+    update tb_user
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headerUrl != null">
+        header_url = #{headerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtTime != null">
+        gmt_time = #{gmtTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="thirdId != null">
+        third_id = #{thirdId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.jkm.uis.facade.entities.User">
+    update tb_user
+    set account = #{account,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      header_url = #{headerUrl,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      password = #{password,jdbcType=VARCHAR},
+      gmt_time = #{gmtTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      third_id = #{thirdId,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

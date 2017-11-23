@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <dubbo:application name="klm-manage-consumer"/>
+
+    <dubbo:registry id="zk-user" address="${dubbo.registry.address}" protocol="zookeeper"/>
+    <dubbo:consumer registry="zk-user" check="false"/>
+
+    <dubbo:annotation package="cn.jkm.api.klm.manage.service" />
+
+
+    <dubbo:reference id="sysUserService" interface="cn.jkm.service.sys.SysUserService" url="dubbo://localhost:20887"/>
+    <dubbo:reference id="sysRoleService" interface="cn.jkm.service.sys.SysRoleService" url="dubbo://localhost:20887"/>
+    <dubbo:reference id="userService" interface="cn.jkm.service.sys.UserService" url="dubbo://localhost:20887"/>
+    <!--<dubbo:reference id="branchService" interface="cn.jkm.service.eb.product.BranchService" url="dubbo://localhost:20887"/>-->
+    <!--<dubbo:reference id="contentPostService" interface="cn.jkm.service.content.ContentPostService" url="dubbo://localhost:20887"/>-->
+    <!--<dubbo:reference id="userAccountService" interface="cn.jkm.service.eb.UserAccountService" url="dubbo://localhost:20888" version="1.0"/>-->
+
+</beans>

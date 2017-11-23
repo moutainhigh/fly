@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="message-center@Unix 项目构建过程" default="本地发布(BETA)" basedir=".">
+
+    <property name="artifactId" value="message-center" />
+    <property name="version" value="1.0.0.1" />
+    <property name="deployDir" value="/root/workspace/MC" />
+    <property name="tempDir" value="../.temp" />
+    <property name="pkgName" value="mc" />
+
+    <condition property="conditionDeployDir">
+        <and>
+            <available file="${deployDir}" type="dir"/>
+        </and>
+    </condition>
+    <target name="删除安装目录" if="conditionDeployDir">
+        <delete dir="${deployDir}" />
+    </target>
+
+    <condition property="conditionTempDir">
+        <and>
+            <available file="${tempDir}" type="dir"/>
+        </and>
+    </condition>
+    <target name="删除临时目录" if="conditionTempDir">
+        <delete dir="${tempDir}" />
+    </target>
+
+    <target name="jar:compile">
+        <delete dir="target/classes" />
+        <exec executable="/bin/sh">
+            <arg value="-c" />
+            <arg value="mvn compile -Dfile.encoding=UTF8" />
+        </exec>
+    </target>
+
+    <target name="jar:package" depends="jar:compile">
+        <delete file="target/${artifactId}-${version}.jar" />
+        <exec executable="/bin/sh">
+            <arg value="-c" />
+            <arg value="mvn clean package -Dfile.encoding=UTF8" />
+        </exec>
+    </target>
+
+    <target name="打包文件" depends="jar:compile">
+        <delete file="target/${artifactId}-${version}.jar" />
+        <delete dir="target/lib" />
+        <exec executable="/bin/sh">
+            <arg value="-c" />
+            <arg value="mvn dependency:copy-dependencies" />
+        </exec>
+        <exec executable="/bin/sh">
+            <arg value="-c" />
+            <arg value="mvn clean package -Dfile.encoding=UTF8" />
+        </exec>
+    </target>
+
+    <target name="本地安装" depends="jar:package">
+        <exec executable="/bin/sh">
+            <arg value="-c" />
+            <arg value="mvn install:install-file -DpomFile=pom.xml -Dpackaging=jar -Dfile=target/${artifactId}-${version}.jar" />
+        </exec>
+    </target>
+
+    <target name="重获源代码">
+        <delete dir="src/main" />
+        <delete dir="src/test" />
+        <exec executable="/bin/sh">
+            <arg value="-c" />
+            <arg value="mvn scm:update" />
+        </exec>
+    </target>
+
+    <target name="本地发布(BETA)" depends="删除安装目录,重获源代码,打包文件">
+        <copy todir="${deployDir}">
+            <fileset dir="target">
+                <include name="lib/" />
+                <include name="${artifactId}-${version}.jar" />
+            </fileset>
+            <fileset file="changelog.txt"/>
+        </copy>
+        <copy todir="${deployDir}/conf">
+            <fileset dir="src/main/resources">
+                <include name="config.properties" />
+            </fileset>
+        </copy>
+        <copydir dest="${deployDir}/bin" src="src/scripts"></copydir>
+        <delete dir="src/main" />
+        <delete dir="src/test" />
+    </target>
+
+    <target name="tst" depends="删除临时目录,重获源代码,打包文件">
+        <mkdir dir="${tempDir}/${pkgName}"/>
+        <copy todir="${tempDir}/${pkgName}">
+            <fileset dir="target">
+                <include name="lib/" />
+                <include name="${artifactId}-${version}.jar" />
+            </fileset>
+            <fileset file="changelog.txt"/>
+        </copy>
+        <copy todir="${tempDir}/${pkgName}/conf">
+            <fileset dir="src/main/resources">
+                <include name="config.properties.test" />
+            </fileset>
+        </copy>
+        <rename src="${tempDir}/${pkgName}/conf/config.properties.test" dest="${tempDir}/${pkgName}/conf/config.properties"/>
+        <copydir dest="${tempDir}/${pkgName}/bin" src="src/scripts"></copydir>
+        <delete dir="src/main" />
+        <delete dir="src/test" />
+        <zip destfile="../${pkgName}.${version}.beta.zip" basedir="${tempDir}" />
+        <delete dir="${tempDir}" />
+    </target>
+
+    <target name="pdt" depends="删除临时目录,重获源代码,打包文件">
+        <mkdir dir="${tempDir}/${pkgName}"/>
+        <copy todir="${tempDir}/${pkgName}">
+            <fileset dir="target">
+                <include name="lib/" />
+                <include name="${artifactId}-${version}.jar" />
+            </fileset>
+            <fileset file="changelog.txt"/>
+        </copy>
+        <copy todir="${tempDir}/${pkgName}/conf">
+            <fileset dir="src/main/resources">
+                <include name="config.properties.product" />
+            </fileset>
+        </copy>
+        <rename src="${tempDir}/${pkgName}/conf/config.properties.product" dest="${tempDir}/${pkgName}/conf/config.properties"/>
+        <copydir dest="${tempDir}/${pkgName}/bin" src="src/scripts"></copydir>
+        <delete dir="src/main" />
+        <delete dir="src/test" />
+        <zip destfile="../${pkgName}.${version}.release.zip" basedir="${tempDir}" />
+        <delete dir="${tempDir}" />
+    </target>
+
+</project>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean" id="conversionService">
+        <!--<property name="converters">-->
+        <!--other convert DateConverter-->
+        <!--</property>-->
+    </bean>
+
+
+    <bean class="cn.jkm.api.core.helper.NullValueFilter" id="NullValueFilter"/>
+    <bean id="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
+        <property name="serializerFeatures">
+            <array>
+                <value type="com.alibaba.fastjson.serializer.SerializerFeature">WriteMapNullValue</value>
+                <value type="com.alibaba.fastjson.serializer.SerializerFeature">WriteNullStringAsEmpty</value>
+            </array>
+        </property>
+        <property name="serializeFilters" ref="NullValueFilter"/>
+    </bean>
+
+    <mvc:annotation-driven conversion-service="conversionService">
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+
+                </property>
+                <property name="fastJsonConfig" ref="fastJsonConfig"></property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <context:component-scan base-package="cn.jkm.api.klm.app.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+</beans>

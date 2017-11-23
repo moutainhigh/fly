@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: user
+  datasource:
+        name: test
+        url: jdbc:mysql://112.74.112.143:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: zhanghr
+        password: zhanghr
+        driverClassName: com.mysql.jdbc.Driver     
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://zhanghr:zhanghr@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    lease-renewal-interval-in-seconds: 5
+server:
+  port: 8002
+mybatis:
+  type-aliases-package: com.zhanghr.user.model  

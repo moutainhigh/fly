@@ -1,0 +1,14 @@
+upload.path = /data/topx/uploadfile/mcfiles/
+download.path.cdn = http://172.16.4.222/topx/uploadfile/mcfiles/
+#\u6587\u5b57\u6d88\u606f\u5b58\u5165\u804a\u5929\u8bb0\u5f55
+chatMessage.client.sendUrl = http://172.16.1.75:6060/helome-knowledge-03/chatmessage/send
+#mc\u76d1\u542cwebsocket \u672c\u5730\u7aef\u53e3
+mc.websocket.port = 8001
+#mc\u76d1\u542csocket\u7aef\u53e3
+mc.socket.port = 8000
+#memcached \u5730\u5740
+memcached.address =127.0.0.1:11211
+#memcached \u547d\u540d\u7a7a\u95f4
+memcached.namespace = mecache.
+#\u9a8c\u8bc1token url
+verifyToken.url= http://172.16.4.96:80/cas-server-webapp/remote/security/checkUserLoginStatus

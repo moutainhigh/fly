@@ -1,0 +1,51 @@
+系统用户详情接口，客户端点击新增用户或权限资料修改（sysUserInfo1.0）
+-----------------------------
+>请求参数:
+    
+    {
+        userId:用户id（非必传，为空代表新增，只返回角色列表，否则代表修改，返回角色列表与当前用户信息）
+    }
+
+>返回参数：
+
+    //userId为空
+	{
+	    message:
+        body:[
+            {
+                roleId:
+                roleName:
+            }
+            ......
+        ]
+        status:
+    }
+    //userId不为空
+    {
+        message:
+        body:{
+            //当前用户信息
+            sysUser:{
+                accountName:
+                createAt:
+                headUrl:
+                id:
+                password:
+                realName:
+                roleId:
+                status:
+                updateAt:
+                userStatus:
+            }
+            //角色列表
+            sysRoles:[
+                {
+                    roleId:
+                    roleName:
+                }
+                ......
+            ]
+        }
+        status:
+    }
+

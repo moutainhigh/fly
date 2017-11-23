@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>手机接口</title>
+    <link rel="stylesheet" data-th-href="@{/css/index.css}"/>
+    <link rel="stylesheet" data-th-href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="menu">
+        <div class="title">
+            手机接口
+        </div>
+        <div class="first_menu">
+            <div class="first_menu_box">接口定义</div>
+            <div class="two_menu">
+                <div class="two_menu_box" service="api" version="1.0">接口定义</div>
+                <div class="two_menu_box" service="test" version="1.0">测试接口</div>
+            </div>
+        </div>
+      </div>
+
+    <article>
+        <div class="ajax_content">
+        </div>
+    </article>
+
+    <div class="clear"></div>
+</div>
+
+<script data-th-src="@{/js/jquery.min.js}"></script>
+<script>
+    $(function () {
+        $(".first_menu_box").on("click", function () {
+            $(".first_menu_box").removeClass("active");
+            $(this).addClass("active");
+            $(this).parent().find(".two_menu").toggle(300);
+        })
+        $(".two_menu_box").on("click", function () {
+            $(".two_menu_box").removeClass("active");
+            $(this).addClass("active");
+            var version = $(this).attr("version");
+            var service = $(this).attr("service");
+           var data = {
+                version:version,
+                service :service
+            };
+            $.post("/app/api", data).done(function (result) {
+                if (result.status ==200) {
+                    $(".ajax_content").html(result.html);
+                } else {
+                    $.alert(result.message);
+                }
+            }).fail(function () {
+                $.alert('服务器响应失败，请稍候重试！');
+            })
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>hsd</groupId>
+  <artifactId>root</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>hsd-redis</module>
+  	<module>hsd-mongo</module>
+  	
+  	<module>hsd-mc</module>
+  	<module>hsd-core</module>
+  	<module>hsd-mysql</module>
+  	<module>hsd-model</module>
+    <module>hsd-oa-service</module>
+    <module>hsd-portal</module>
+    <module>hsd-eurekaservice</module>
+  </modules>
+  
+  
+   <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--spring-->
+        <spring-framework.version>4.3.1.RELEASE</spring-framework.version>
+        <junit.version>4.12</junit.version>
+        <!--Logging-->
+        <logback.version>1.1.7</logback.version>
+        <sl4j.version>1.7.12</sl4j.version>
+        <log4j.version>1.7.21</log4j.version>
+        <slf4j-api.version>1.7.16</slf4j-api.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.10</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+
+    <!--  <plugin>  
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-javadoc-plugin</artifactId>  
+                <version>2.10.2</version>  
+                <configuration>  
+                    <aggregate>true</aggregate>  
+                </configuration>  
+                <executions>  
+                    <execution>  
+                        <id>attach-javadocs</id>  
+                        <goals>  
+                            <goal>jar</goal>  
+                        </goals>  
+                    </execution>  
+                </executions>  
+            </plugin>   -->
+            <!-- 生成sources源码包的插件 -->  
+            <plugin>  
+                <artifactId>maven-source-plugin</artifactId>  
+                <version>2.4</version>  
+                <configuration>  
+                    <attach>true</attach>  
+                </configuration>  
+                <executions>  
+                    <execution>  
+                        <phase>package</phase>  
+                        <goals>  
+                            <goal>jar-no-fork</goal>  
+                        </goals>  
+                    </execution>  
+                </executions>  
+            </plugin>  
+        </plugins>
+    </build>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${sl4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <repositories>
+        <repository>
+            <id>hsd repository</id>
+            <name>hsd repository</name>
+            <url>http://120.25.195.67:8081/repository/maven-public/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>hsd plugin repository</id>
+            <name>hsd plugin repository</name>
+            <url>http://120.25.195.67:8081/repository/maven-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+    <distributionManagement>
+        <repository>
+            <id>hsd-releases</id>
+            <name>hsd Release Repository</name>
+            <url>http://120.25.195.67:8081/repository/hsd-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>hsd-snapshots</id>
+            <name>hsd snapshots Repository</name>
+            <url>http://120.25.195.67:8081/repository/hsd-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
+    
+    
+    
+</project>
