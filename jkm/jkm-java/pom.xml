@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.jkm</groupId>
+    <artifactId>jkm-root</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>jkm-core</module>
+        <module>jkm-service</module>
+        <module>jkm-provider</module>
+        <module>jkm-api</module>
+        <module>jkm-test</module>
+        <module>jkm-doc</module>
+    </modules>
+    <packaging>pom</packaging>
+
+
+    <properties>
+        <java-source.version>1.8</java-source.version>
+        <java-target.version>1.8</java-target.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--spring-->
+        <spring-framework.version>4.3.1.RELEASE</spring-framework.version>
+        <!--Logging-->
+        <logback.version>1.1.7</logback.version>
+        <sl4j.version>1.7.12</sl4j.version>
+        <log4j.version>1.7.21</log4j.version>
+        <slf4j-api.version>1.7.16</slf4j-api.version>
+
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <junit.version>4.12</junit.version>
+    </properties>
+
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>development</id>
+            <properties>
+                <package.environment>development</package.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>product</id>
+            <properties>
+                <package.environment>product</package.environment>
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <repositories>
+        <repository>
+            <id>jkm repository</id>
+            <name>jkm repository</name>
+            <url>http://120.25.195.67:8081/repository/maven-public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jkm plugin repository</id>
+            <name>jkm plugin repository</name>
+            <url>http://120.25.195.67:8081/repository/maven-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/environment/${package.environment}</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java-source.version}</source>
+                    <target>${java-target.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.10</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring-framework.version}</version>
+            </dependency>
+            <!--json-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.35</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+            </dependency>
+            <!--log-->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${sl4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring-framework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.21</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.0.23</version>
+            </dependency>
+
+            <!--framework-->
+
+            <dependency>
+                <groupId>cn.jkm.framework</groupId>
+                <artifactId>jkm-core</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.jkm.framework</groupId>
+                <artifactId>jkm-mysql</artifactId>
+                <version>1.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.jkm.framework</groupId>
+                <artifactId>jkm-mongo</artifactId>
+                <version>1.0.1</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>cn.jkm.framework</groupId>
+                <version>1.0.0</version>
+                <artifactId>jkm-dubbox</artifactId>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+</project>

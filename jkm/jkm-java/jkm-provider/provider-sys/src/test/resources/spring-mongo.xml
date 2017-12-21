@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+http://www.springframework.org/schema/data/mongo ">
+
+
+
+    <!-- mongodb 查询模板-->
+    <mongo:mongo host="${mongo.url}" port="${mongo.port}" id="mongo">
+        <mongo:options
+                connections-per-host="${mongo.connections}"
+                threads-allowed-to-block-for-connection-multiplier="${mongo.threads}"/>
+    </mongo:mongo>
+    <mongo:db-factory dbname="${mongo.name}" mongo-ref="mongo" id="mongoFactory"/>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoFactory"/>
+    </bean>
+
+
+</beans>

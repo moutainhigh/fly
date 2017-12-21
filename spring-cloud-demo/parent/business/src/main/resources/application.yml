@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: business
+server:
+  port: 9090
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://zhanghr:zhanghr@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+logging:
+  pattern:
+    level: warn
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+  

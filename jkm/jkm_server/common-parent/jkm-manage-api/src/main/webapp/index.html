@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery-3.2.1.js"></script>
+</head>
+<body>
+<input id="loginBtn" type="button" value="登录">
+<script>
+    $("#loginBtn").on("click", function () {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8090/login/login",
+            data: {name:"John"},
+            success: function(msg){
+                console.info(msg);
+            },
+            error: function(XMLHttpRequest, textStatus) {
+                console.error(textStatus);
+            }
+        });
+    });
+</script>
+</body>
+</html>

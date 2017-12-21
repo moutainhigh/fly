@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>后台管理接口</title>
+    <link rel="stylesheet" data-th-href="@{/css/index.css}"/>
+    <link rel="stylesheet" data-th-href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="menu">
+        <div class="title">
+            后台接口
+        </div>
+        <div class="first_menu">
+            <div class="first_menu_box">接口定义</div>
+            <div class="two_menu">
+                <!--<div class="two_menu_box"><a data-th-href="@{/api(service='api',version='1.0')}">接口定义</a></div>-->
+                <div class="two_menu_box" service="api" version="1.0">接口定义</div>
+            </div>
+        </div>
+        <div class="first_menu">
+            <div class="first_menu_box">系统管理</div>
+            <div class="two_menu">
+                <div class="two_menu_box" service="login" version="1.0">用户登录</div>
+                <div class="two_menu_box" service="test" version="1.0">test</div>
+                <div class="two_menu_box">二级菜单</div>
+                <div class="two_menu_box">二级菜单</div>
+                <div class="two_menu_box">二级菜单</div>
+            </div>
+        </div>
+        <div class="first_menu">
+            <div class="first_menu_box">用户账户</div>
+            <div class="two_menu">
+                <div class="two_menu_box" service="getUserAccount" version="1.0">根据用户id获取用户账户</div>
+                <div class="two_menu_box" service="payment" version="1.0">获取支付宝支付凭证</div>
+                <div class="two_menu_box">二级菜单</div>
+                <div class="two_menu_box">二级菜单</div>
+            </div>
+        </div>
+        <div class="first_menu">
+            <div class="first_menu_box">账号管理</div>
+            <div class="two_menu">
+                <div class="two_menu_box" service="login" version="1.0">系统用户登录</div>
+                <div class="two_menu_box" service="roleCreate" version="1.0">新建角色</div>
+                <div class="two_menu_box" service="roleDelete" version="1.0">删除角色</div>
+                <div class="two_menu_box" service="roleInfo" version="1.0">角色详情</div>
+                <div class="two_menu_box" service="roleList" version="1.0">角色列表</div>
+                <div class="two_menu_box" service="roleUpdate" version="1.0">修改角色</div>
+                <div class="two_menu_box" service="sysUserInfo" version="1.0">系统用户详情</div>
+                <div class="two_menu_box" service="sysUserList" version="1.0">系统用户列表</div>
+                <div class="two_menu_box" service="sysUserLock" version="1.0">锁定系统用户</div>
+                <div class="two_menu_box" service="sysUserUnlock" version="1.0">解锁系统用户</div>
+                <div class="two_menu_box" service="userCreate" version="1.0">新建系统用户</div>
+                <div class="two_menu_box" service="userDelete" version="1.0">删除系统用户</div>
+                <div class="two_menu_box" service="userInfo" version="1.0">APP用户详情</div>
+                <div class="two_menu_box" service="userList" version="1.0">APP用户列表</div>
+                <div class="two_menu_box" service="userLock" version="1.0">锁定APP用户</div>
+                <div class="two_menu_box" service="userResetPwd" version="1.0">重置系统用户密码</div>
+                <div class="two_menu_box" service="userUnlock" version="1.0">解锁APP用户</div>
+                <div class="two_menu_box" service="userUpdate" version="1.0">修改系统用户</div>
+                <div class="two_menu_box" service="userUpdatePwd" version="1.0">修改系统用户密码</div>
+            </div>
+        </div>
+
+        <div class="first_menu">
+            <div class="first_menu_box">内容管理</div>
+            <div class="two_menu">
+                <div class="two_menu_box" service="contentPostCreate" version="1.0">添加新闻</div>
+                <div class="two_menu_box" service="contentPostList" version="1.0">搜索帖子</div>
+                <div class="two_menu_box" service="contentPostDetail" version="1.0">帖子详情</div>
+                <div class="two_menu_box" service="contentCommentList" version="1.0">帖子评论</div>
+                <div class="two_menu_box" service="contentComplaintHistory" version="1.0">帖子投诉历史</div>
+                <div class="two_menu_box" service="contentPostStick" version="1.0">帖子置顶</div>
+                <div class="two_menu_box" service="contentPostShow" version="1.0">帖子显示或隐藏</div>
+                <div class="two_menu_box" service="contentPostUntreated" version="1.0">查询帖子是否有未处理投诉</div>
+                <div class="two_menu_box" service="contentPostRepulse" version="1.0">打回帖子</div>
+                <div class="two_menu_box" service="contentPostDelete" version="1.0">删除帖子</div>
+                <div class="two_menu_box" service="">-----Banner-----</div>
+                <div class="two_menu_box" service="bannerAdd" version="1.0">添加Banner或者闪屏</div>
+                <div class="two_menu_box" service="bannerDel" version="1.0">删除banner或闪屏</div>
+                <div class="two_menu_box" service="bannerGet" version="1.0">获取Banner或闪屏</div>
+                <div class="two_menu_box" service="bannerList" version="1.0">获取banner列表</div>
+                <div class="two_menu_box" service="bannerUpsert" version="1.0">新增或更新banner</div>
+                <div class="two_menu_box" service="splashList" version="1.0">闪屏列表</div>
+                <div class="two_menu_box" service="">-----setting-----</div>
+                <div class="two_menu_box" service="rulePostInfo" version="1.0">获取发帖积分</div>
+                <div class="two_menu_box" service="rulePostSave" version="1.0">发帖积分保存</div>
+                <div class="two_menu_box" service="shareSave" version="1.0">分享保存</div>
+                <div class="two_menu_box" service="shareInfo" version="1.0">获取分享信息</div>
+                <div class="two_menu_box" service="">-----关键词-----</div>
+                <div class="two_menu_box" service="wordAdd" version="1.0">添加关键词</div>
+                <div class="two_menu_box" service="wordAddBatch" version="1.0">批量添加关键词</div>
+                <div class="two_menu_box" service="wordDel" version="1.0">删除关键词</div>
+                <div class="two_menu_box" service="wordDelBatch" version="1.0">批量删除关键词</div>
+                <div class="two_menu_box" service="wordAllDel" version="1.0">清空关键词</div>
+                <div class="two_menu_box" service="wordList" version="1.0">关键词列表</div>
+
+            </div>
+        </div>
+    </div>
+    <article>
+        <div class="ajax_content">
+        </div>
+    </article>
+
+    <div class="clear"></div>
+</div>
+
+<script data-th-src="@{/js/jquery.min.js}"></script>
+<script>
+    $(function () {
+        $(".first_menu_box").on("click", function () {
+            $(".first_menu_box").removeClass("active");
+            $(this).addClass("active");
+            $(this).parent().find(".two_menu").toggle(300);
+        })
+
+        $(".two_menu_box").on("click", function () {
+            $(".two_menu_box").removeClass("active");
+            $(this).addClass("active");
+            var version = $(this).attr("version");
+            var service = $(this).attr("service");
+           var data = {
+                version:version,
+                service :service
+            };
+            $.post("/manage/api", data).done(function (result) {
+                if (result.status ==200) {
+                    $(".ajax_content").html(result.html);
+                } else {
+                    $.alert(result.message);
+                }
+            }).fail(function () {
+                $.alert('服务器响应失败，请稍候重试！');
+            })
+        })
+
+    })
+</script>
+</body>
+</html>

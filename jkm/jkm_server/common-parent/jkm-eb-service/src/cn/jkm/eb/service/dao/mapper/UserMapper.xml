@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jkm.eb.service.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.jkm.eb.facade.entities.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="gmt_time" jdbcType="DOUBLE" property="gmtTime" />
+    <result column="header_url" jdbcType="VARCHAR" property="headerUrl" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="third_id" jdbcType="VARCHAR" property="thirdId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, account, gmt_time, header_url, password, sex, tel, third_id, type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.jkm.eb.facade.entities.User">
+    insert into user (id, name, account, 
+      gmt_time, header_url, password, 
+      sex, tel, third_id, 
+      type)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{gmtTime,jdbcType=DOUBLE}, #{headerUrl,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{thirdId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.jkm.eb.facade.entities.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="gmtTime != null">
+        gmt_time,
+      </if>
+      <if test="headerUrl != null">
+        header_url,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="thirdId != null">
+        third_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtTime != null">
+        #{gmtTime,jdbcType=DOUBLE},
+      </if>
+      <if test="headerUrl != null">
+        #{headerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdId != null">
+        #{thirdId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.jkm.eb.facade.entities.User">
+    update user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtTime != null">
+        gmt_time = #{gmtTime,jdbcType=DOUBLE},
+      </if>
+      <if test="headerUrl != null">
+        header_url = #{headerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdId != null">
+        third_id = #{thirdId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.jkm.eb.facade.entities.User">
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      gmt_time = #{gmtTime,jdbcType=DOUBLE},
+      header_url = #{headerUrl,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=VARCHAR},
+      third_id = #{thirdId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

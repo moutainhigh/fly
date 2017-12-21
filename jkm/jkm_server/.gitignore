@@ -1,0 +1,37 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+/target
+/.settings
+/*/.settings
+/*/*/.settings
+/.classpath
+/.project
+/jpa
+/common-parent/jkm-app-api/bin/
+
+# ignore Maven generated target folders
+target
+pom.xml
+# ignore eclipse files
+.project
+.classpath
+.settings
+.metadata
+./plugins/
+/Servers
+.recommenders
+
+
+# ignore Maven generated target folders
+target
+
+# ignore idea files
+.idea/
+out/
+gen/
+*.iml
+springaop/src/test/java/cn/jkm/springaop/AppTest.java

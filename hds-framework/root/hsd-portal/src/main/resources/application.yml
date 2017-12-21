@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: portal
+server:
+  port: 9091
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://hsd:hsd@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+logging:
+  pattern:
+    level: warn
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+  

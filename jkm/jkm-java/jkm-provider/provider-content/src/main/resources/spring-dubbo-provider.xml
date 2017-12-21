@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <dubbo:application name="jkm-content-provider"/>
+
+    <dubbo:registry id="zk-user" address="${dubbo.registry.address}" protocol="zookeeper"/>
+
+
+    <dubbo:protocol name="dubbo" port="20887" id="dubbo-user"/>
+
+    <dubbo:provider registry="zk-user" protocol="dubbo-user"
+                    cluster="failsafe"
+                    retries="0"
+                    timeout="10000"
+                    loadbalance="random"/>
+
+    <dubbo:annotation package="cn.jkm.provider"/>
+    <dubbo:monitor protocol="registry"/>
+
+
+</beans>

@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>xinfangcomp</groupId>
+	<artifactId>xinfangcomp</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.3.0.RELEASE</version>
+	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<activiti.version>5.21.0</activiti.version>
+		<swagger2markup.version>1.2.0</swagger2markup.version>
+		<asciidoctor.input.directory>${project.basedir}/src/docs/asciidoc</asciidoctor.input.directory>
+
+		<swagger.output.dir>${project.build.directory}/swagger</swagger.output.dir>
+		<swagger.snippetOutput.dir>${project.build.directory}/asciidoc/snippets</swagger.snippetOutput.dir>
+		<generated.asciidoc.directory>${project.build.directory}/asciidoc/generated</generated.asciidoc.directory>
+		<asciidoctor.html.output.directory>${project.build.directory}/asciidoc/html</asciidoctor.html.output.directory>
+		<asciidoctor.pdf.output.directory>${project.build.directory}/asciidoc/pdf</asciidoctor.pdf.output.directory>
+		<swagger.input>${swagger.output.dir}/swagger.json</swagger.input>
+		<drools.version>5.6.0.Final</drools.version>
+	</properties>
+
+	<dependencies>
+	<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.26-incubating</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xf-util</groupId>
+			<artifactId>xf-file</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- http://blog.csdn.net/wh_ouyangshuang/article/details/48048111  生产环境监控 -->
+    <dependency>  
+        <groupId>org.springframework.boot</groupId>  
+        <artifactId>spring-boot-starter-actuator</artifactId>  
+    </dependency>  
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring-boot-starter-basic</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+
+		<!-- http://www.tuicool.com/articles/Bz6nueu -->
+		<!-- 创建、保存、转换json与xml格式等 -->
+		<!-- <dependency> <groupId>org.activiti</groupId> <artifactId>activiti-modeler</artifactId> 
+			<version>5.21.0</version> </dependency> -->
+		<!-- 流程图布局（layout）、节点高亮等 -->
+		<!-- <dependency> <groupId>org.activiti</groupId> <artifactId>activiti-diagram-rest</artifactId> 
+			<version>5.21.0</version> </dependency> -->
+
+		<!-- <dependency> <groupId>org.activiti</groupId> <artifactId>spring-boot-starter-basic</artifactId> 
+			<version>${activiti.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>org.activiti</groupId> <artifactId>activiti-modeler</artifactId> 
+			<version>${activiti.version}</version> </dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency> <!---->
+
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<version>1.1.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>1.5.2.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-staticdocs</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-parameter-names</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-smile</artifactId>
+			<version>2.6.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-afterburner</artifactId>
+			<version>2.6.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.26</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-parameter-names</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0-rc1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<!-- 阿里fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.29</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.wenhao</groupId>
+			<artifactId>jpa-spec</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.15</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.15</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.java-websocket</groupId>
+			<artifactId>Java-WebSocket</artifactId>
+			<version>1.3.4</version>
+		</dependency>
+		
+		<dependency>
+		<groupId>org.apache.camel</groupId>
+		<artifactId>camel-ftp</artifactId>
+		<version>2.13.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j-cypher-compiler-2.1</artifactId>
+			<version>2.1.8</version>
+		</dependency>
+	</dependencies>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jcenter-snapshots</id>
+			<name>jcenter</name>
+			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>jcenter-releases</id>
+			<name>jcenter</name>
+			<url>http://jcenter.bintray.com</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<finalName>xinfangapi</finalName>
+		<resources>
+			<resource>
+				<targetPath>${project.build.directory}/classes</targetPath>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.html</include>
+					<include>**/*.ftl</include>
+					<include>**/*.css</include>
+					<include>**/*.js</include>
+					<include>**/*.bpmn</include>
+					<include>**/*.png</include>
+					<include>**/*.json</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<pluginManagement>
+			<plugins>
+				<!-- 解决Maven插件在Eclipse内执行了一系列的生命周期引起冲突 -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[2.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<classesDirectory>target/classes/</classesDirectory>
+					<archive>
+						<manifest>
+							<mainClass>com.xinfang.Application</mainClass>
+							<!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
+							<useUniqueVersions>false</useUniqueVersions>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+							<Class-Path>.</Class-Path>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<type>jar</type>
+							<includeTypes>jar</includeTypes>
+							<!-- <useUniqueVersions>false</useUniqueVersions> -->
+							<outputDirectory>
+								${project.build.directory}/lib
+							</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-compiler-plugin</artifactId> 
+				<configuration> <source>1.8</source> <target>1.8</target> </configuration> 
+				</plugin> -->
+
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-plugin</artifactId> 
+				<configuration> <systemPropertyVariables> <io.springfox.staticdocs.outputDir>${swagger.output.dir}</io.springfox.staticdocs.outputDir> 
+				<io.springfox.staticdocs.snippetsOutputDir>${swagger.snippetOutput.dir}</io.springfox.staticdocs.snippetsOutputDir> 
+				</systemPropertyVariables> </configuration> </plugin> <plugin> <groupId>io.github.swagger2markup</groupId> 
+				<artifactId>swagger2markup-maven-plugin</artifactId> <version>${swagger2markup.version}</version> 
+				<dependencies> <dependency> <groupId>io.github.swagger2markup</groupId> <artifactId>swagger2markup-import-files-ext</artifactId> 
+				<version>${swagger2markup.version}</version> </dependency> <dependency> <groupId>io.github.swagger2markup</groupId> 
+				<artifactId>swagger2markup-spring-restdocs-ext</artifactId> <version>${swagger2markup.version}</version> 
+				</dependency> </dependencies> <configuration> <swaggerInput>${swagger.input}</swaggerInput> 
+				<outputDir>${generated.asciidoc.directory}</outputDir> <config> <swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage> 
+				<swagger2markup.pathsGroupedBy>TAGS</swagger2markup.pathsGroupedBy> <swagger2markup.extensions.dynamicOverview.contentPath>${project.basedir}/src/docs/asciidoc/extensions/overview</swagger2markup.extensions.dynamicOverview.contentPath> 
+				<swagger2markup.extensions.dynamicDefinitions.contentPath>${project.basedir}/src/docs/asciidoc/extensions/definitions</swagger2markup.extensions.dynamicDefinitions.contentPath> 
+				<swagger2markup.extensions.dynamicPaths.contentPath>${project.basedir}/src/docs/asciidoc/extensions/paths</swagger2markup.extensions.dynamicPaths.contentPath> 
+				<swagger2markup.extensions.dynamicSecurity.contentPath>${project.basedir}src/docs/asciidoc/extensions/security/</swagger2markup.extensions.dynamicSecurity.contentPath> 
+				<swagger2markup.extensions.springRestDocs.snippetBaseUri>${swagger.snippetOutput.dir}</swagger2markup.extensions.springRestDocs.snippetBaseUri> 
+				<swagger2markup.extensions.springRestDocs.defaultSnippets>false</swagger2markup.extensions.springRestDocs.defaultSnippets> 
+				</config> </configuration> <executions> <execution> <phase>test</phase> <goals> 
+				<goal>convertSwagger2markup</goal> </goals> </execution> </executions> </plugin> 
+				Run the generated asciidoc through Asciidoctor to generate other documentation 
+				types, such as PDFs or HTML5 <plugin> <groupId>org.asciidoctor</groupId> 
+				<artifactId>asciidoctor-maven-plugin</artifactId> <version>1.5.3</version> 
+				Include Asciidoctor PDF for pdf generation <dependencies> <dependency> <groupId>org.asciidoctor</groupId> 
+				<artifactId>asciidoctorj-pdf</artifactId> <version>1.5.0-alpha.10.1</version> 
+				</dependency> </dependencies> Configure generic document generation settings 
+				<configuration> <sourceDirectory>${asciidoctor.input.directory}</sourceDirectory> 
+				<sourceDocumentName>index.adoc</sourceDocumentName> <attributes> <doctype>book</doctype> 
+				<toc>left</toc> <toclevels>3</toclevels> <numbered></numbered> <hardbreaks></hardbreaks> 
+				<sectlinks></sectlinks> <sectanchors></sectanchors> <generated>${generated.asciidoc.directory}</generated> 
+				</attributes> </configuration> Since each execution can only handle one backend, 
+				run separate executions for each desired output type <executions> <execution> 
+				<id>output-html</id> <phase>test</phase> <goals> <goal>process-asciidoc</goal> 
+				</goals> <configuration> <backend>html5</backend> <outputDirectory>${asciidoctor.html.output.directory}</outputDirectory> 
+				</configuration> </execution> <execution> <id>output-pdf</id> <phase>test</phase> 
+				<goals> <goal>process-asciidoc</goal> </goals> <configuration> <backend>pdf</backend> 
+				<outputDirectory>${asciidoctor.pdf.output.directory}</outputDirectory> </configuration> 
+				</execution> </executions> </plugin> -->
+
+		</plugins>
+	</build>
+</project>

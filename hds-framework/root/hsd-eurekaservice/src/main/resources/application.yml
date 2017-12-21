@@ -1,0 +1,17 @@
+security:
+  basic:
+    enabled: true
+  user:
+    name: hsd
+    password: hsd
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://hsd:hsd@localhost:8761/eureka
+  
+      
+      

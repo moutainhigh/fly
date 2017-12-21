@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="/Users/yangxutao/Documents/mysql-connector-java-5.1.30-bin.jar" />
+	<context id="context">
+		<!--关闭注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+
+		<jdbcConnection connectionURL="jdbc:mysql://192.168.10.182/jkm"
+			driverClass="com.mysql.jdbc.Driver" password="123" userId="root" />
+
+		<javaModelGenerator targetPackage="cn.jkm.uis.facade.entities"
+			targetProject="jkm-uis-facade/src/main/java" />
+
+		<sqlMapGenerator targetPackage="cn.jkm.uis.service.dao.mapper"
+			targetProject="jkm-uis-service/src/main/java" />
+
+		<javaClientGenerator targetPackage="cn.jkm.uis.service.dao"
+			targetProject="jkm-uis-service/src/main/java" type="XMLMAPPER" />
+
+
+		<table schema="jkm" tableName="tb_user" domainObjectName="User"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+	</context>
+</generatorConfiguration>

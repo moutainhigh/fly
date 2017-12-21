@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+<link th:href="@{/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
+</head>
+<body>  
+<h2>Hello World!</h2>  
+<a href="./V1/desgin/activiti">activiti</a>  
+  <form action="./create" method="get">  
+    <input type="text" id="name" name="name"></input>  
+    <input type="text" id="key" name="key"></input>  
+    <input type="text" id="description" name="description"></input>  
+    <input type="submit" value="提交"/>  
+  </form>  
+</body> 
+</html>

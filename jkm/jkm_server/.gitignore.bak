@@ -1,0 +1,33 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+/target
+/.settings
+/*/.settings
+/*/*/.settings
+/.classpath
+/.project
+/common-parent/jkm-app-api/bin/
+
+# ignore Maven generated target folders
+target
+
+# ignore eclipse files
+.project
+.classpath
+.settings
+.metadata
+./plugins/
+/Servers
+
+# ignore Maven generated target folders
+target
+
+# ignore idea files
+.idea/
+out/
+gen/
+*.iml

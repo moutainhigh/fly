@@ -1,0 +1,26 @@
+<assembly>
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+	<includeBaseDirectory>true</includeBaseDirectory>
+	<!-- 需要打包的文件集 -->
+	<fileSets>
+		<fileSet>
+			<directory>src/main/assembly/bin</directory>
+			<outputDirectory>bin</outputDirectory>
+			<fileMode>0755</fileMode>
+		</fileSet>
+		<fileSet>
+			<!--<directory>src/main/assembly/conf</directory>-->
+			<directory>src/environment/${package.environment}</directory>
+			<outputDirectory>conf</outputDirectory>
+			<fileMode>0644</fileMode>
+		</fileSet>
+	</fileSets>
+	<!-- 依赖包的输出路径 -->
+	<dependencySets>
+		<dependencySet>
+			<outputDirectory>lib</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+</assembly>
